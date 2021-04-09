@@ -73,9 +73,11 @@ main {
 
 .films_container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   overflow: hidden;
+  position: relative;
+  margin-right: 4px;
+  max-width: calc(308px * 4);
 }
 
 .film {
@@ -85,6 +87,8 @@ main {
   margin: 4px;
   cursor: pointer;
   display: flex;
+  transition: all 0.5s;
+  left: 0;
 }
 
 .overlay {
@@ -98,18 +102,41 @@ main {
   padding: 30px 15px;
   opacity: 0;
   transition: opacity 0.3s;
-  overflow: auto;
 }
 
 .overlay p {
   color: rgba(255, 255, 255, 0.8);
+  margin: 5px 0;
 }
 
 .overlay p strong {
   color: #fff;
 }
 
+.overlay .overview {
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .film:hover .overlay{
   opacity: 1;
+}
+
+main .arrow_container {
+  display: none;
+  line-height: 450px;
+  font-size: 50px;
+  font-weight: bold;
+  margin: 0 20px;
+}
+
+main .arrow_container.display {
+  display: block;
+}
+
+main .arrow_container i {
+  cursor: pointer;
 }
 /* /corpo della pagina */
