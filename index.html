@@ -44,14 +44,14 @@
       <!-- corpo della pagina -->
       <main>
         <div class="films_container">
-          <div class="film">
+          <div v-if="film.poster_path != null" v-for="film in filmFiltered" class="film">
             <div class="overlay">
-              <p><strong>Titolo:</strong> lorem</p>
-              <p><strong>Titolo originale:</strong> lorem</p>
-              <p><strong>Voto:</strong> lorem</p>
-              <p><strong>Overview:</strong> lorem</p>
+              <p><strong>Titolo:</strong> {{film.title}}</p>
+              <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
+              <p><strong>Voto:</strong> {{film.vote_average}}</p>
+              <p><strong>Overview:</strong> {{film.overview}}</p>
             </div>
-            <img src="https://image.tmdb.org/t/p/w300/6NfLuSGpJiwjdYC7j5AxbAcV6Qf.jpg" alt="">
+            <img :src="'https://image.tmdb.org/t/p/w300' + film.poster_path" alt="">
           </div>
         </div>
       </main>

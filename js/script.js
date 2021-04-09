@@ -3,6 +3,7 @@ const app = new Vue (
     el: "#root",
     data: {
       search: "",
+      filmFiltered: [],
     },
     methods: {
       searchFilm: function () {
@@ -13,9 +14,10 @@ const app = new Vue (
             language: "it-IT",
           }
         })
-          .then(function (reply) {
-            console.log(reply.data);
-          })
+        .then((reply) => {
+            this.filmFiltered = reply.data.results;
+          ;
+        })
       }
     },
   }

@@ -81,10 +81,10 @@ main {
 .film {
   height: 450px;
   width: 300px;
-  background: red;
   position: relative;
   margin: 4px;
   cursor: pointer;
+  display: flex;
 }
 
 .overlay {
