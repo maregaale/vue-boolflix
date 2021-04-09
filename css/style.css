@@ -57,3 +57,18 @@ header input {
   margin-right: 5px;
 }
 /* /intestazione */
+
+/* corpo della pagina */
+main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 70px;
+}
+
+.film {
+  height: 450px;
+  width: 300px;
+  background: red;
+}
+/* /corpo della pagina */
