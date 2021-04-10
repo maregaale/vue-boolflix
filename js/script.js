@@ -7,6 +7,7 @@ const app = new Vue (
       displayIf: false,
       goLeftStart: 0,
       goLeft: "",
+      voteStars: [1, 2, 3, 4, 5],
     },
     methods: {
       searchFilm: function () {
@@ -24,10 +25,14 @@ const app = new Vue (
 
             // mostro le frecce del carousel
             this.displayIf = false;
-            
+
             if (this.search != "" && reply.data.results.length > 4) {
               this.displayIf = true;
             }
+            // costruisco il voto in 5 dividendo e arrotondando per eccesso
+            reply.data.results.forEach((item, i) => {
+              item.vote_average = Math.ceil(item.vote_average / 2);
+            });
           })
         } else {
           this.filmFiltered = [];
@@ -36,6 +41,8 @@ const app = new Vue (
 
         // azzero il left dei film per centrare i film nelle nuove ricerche
         this.goLeft = "";
+
+
 
       },
       goSlider: function () {

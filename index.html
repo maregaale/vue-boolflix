@@ -55,7 +55,9 @@
             <div class="overlay">
               <p><strong>Titolo:</strong> {{film.title}}</p>
               <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
-              <p><strong>Voto:</strong> {{film.vote_average}}</p>
+              <p>
+                <strong>Voto:</strong> <i v-for="(star, index) in voteStars" class="fas fa-star" :class="{starActive : star <= film.vote_average }"></i>
+              </p>
               <p class="overview"><strong>Overview:</strong> {{film.overview}}</p>
             </div>
             <img :src="'https://image.tmdb.org/t/p/w300' + film.poster_path" alt="">
