@@ -55,10 +55,15 @@
             <div class="overlay">
               <p><strong>Titolo:</strong> {{film.title}}</p>
               <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
+              <div>
+                Lingua Originale:
+                <img class="flag" v-if="languages.includes(film.original_language)" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
+                <span v-if="!(languages.includes(film.original_language))"> {{film.original_language}}</span>
+              </div>
               <p>
                 <strong>Voto:</strong> <i v-for="(star, index) in voteStars" class="fas fa-star" :class="{starActive : star <= film.vote_average }"></i>
               </p>
-              <p class="overview"><strong>Overview:</strong> {{film.overview}}</p>
+              <p v-if="film.overview != ''" class="overview"><strong>Overview:</strong> {{film.overview}}</p>
             </div>
             <img :src="'https://image.tmdb.org/t/p/w300' + film.poster_path" alt="">
           </div>

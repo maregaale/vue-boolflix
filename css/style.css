@@ -117,6 +117,12 @@ main {
   color: #fff;
 }
 
+.overlay .flag {
+  width: 21px;
+  margin-left: 10px;
+  -webkit-box-shadow: 0 0 7px rgb(255 255 255 / 50%);
+}
+
 .overlay .overview {
   display: -webkit-box;
   -webkit-line-clamp: 10;
