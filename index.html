@@ -51,10 +51,14 @@
         <div class="films_container">
 
           <!-- film -->
-          <div :style="{left : goLeft}" v-if="film.poster_path != null" v-for="film in filmFiltered" class="film">
+          <div :style="{left : goLeft}" v-if="film.poster_path != null" v-for="film in filmAndSeries" class="film">
             <div class="overlay">
-              <p><strong>Titolo:</strong> {{film.title}}</p>
-              <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
+              <p v-if="film.title"><strong>Genere:</strong> film</p>
+              <p v-else-if="film.name"><strong>Genere:</strong> serie tv</p>
+              <p v-if="film.title"><strong>Titolo:</strong> {{film.title}}</p>
+              <p v-else-if="film.name"><strong>Titolo:</strong> {{film.name}}</p>
+              <p v-if="film.original_title"><strong>Titolo originale:</strong> {{film.original_title}}</p>
+              <p v-else-if="film.original_name"><strong>Titolo originale:</strong> {{film.original_name}}</p>
               <div>
                 Lingua Originale:
                 <img class="flag" v-if="languages.includes(film.original_language)" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
