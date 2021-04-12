@@ -42,6 +42,7 @@ const app = new Vue (
         }
 
         // azzero il left dei film per centrare i film nelle nuove ricerche
+        this.goLeftStart = 0;
         this.goLeft = "";
 
       },
@@ -49,7 +50,7 @@ const app = new Vue (
         let filmDisplay = this.filmFiltered.filter( (item) => {
             return item.poster_path != null;
         })
-        if (this.goLeftStart > (-(filmDisplay.length -1) * 300)) {
+        if (this.goLeftStart > (-(filmDisplay.length - 4) * 300)) {
           this.goLeftStart -= 308;
           this.goLeft = this.goLeftStart + 'px';
         }
