@@ -34,40 +34,34 @@ const app = new Vue (
       searchFilm: function () {
 
         if (this.search != "") {
-          axios.all([
-            // prima chiamata API per i film
-            axios.get("https://api.themoviedb.org/3/search/movie", {
-              params: {
-                api_key: "cd918788b3810512019e7d18b803e41d",
-                query: this.search,
-                language: "it-IT",
-              }
-            }),
-            // seconda chiamata API per le serie
-            axios.get("https://api.themoviedb.org/3/search/tv", {
-              params: {
-                api_key: "cd918788b3810512019e7d18b803e41d",
-                query: this.search,
-                language: "it-IT",
-              }
-            }),
-          ])
-          .then(axios.spread((filmReply, serieReply) => {
-            // azione alla prima chiamata
+          // prima chiamata API per i film
+          axios.get("https://api.themoviedb.org/3/search/movie", {
+            params: {
+              api_key: "cd918788b3810512019e7d18b803e41d",
+              query: this.search,
+              language: "it-IT",
+            }
+          })
+          .then((filmReply) => {
             this.filmAndSeries = filmReply.data.results;
 
             this.showArrowsAndVote(filmReply);
             this.voteInFive(filmReply);
-
-            // azione alla seconda chiamata
+          }),
+          // seconda chiamata API per le serie
+          axios.get("https://api.themoviedb.org/3/search/tv", {
+            params: {
+              api_key: "cd918788b3810512019e7d18b803e41d",
+              query: this.search,
+              language: "it-IT",
+            }
+          })
+          .then((serieReply) => {
+            // pusho le serie nell'array
             serieReply.data.results.forEach((item, i) => {
               this.filmAndSeries.push(item);
             });
-
-            this.showArrowsAndVote(serieReply);
-            this.voteInFive(serieReply);
-          }));
-
+          })
         } else {
           this.filmAndSeries = [];
           this.displayIf = false;
@@ -83,7 +77,7 @@ const app = new Vue (
         let filmSeriesFiltered = this.filmAndSeries.filter( (item) => {
             return item.poster_path != null;
         })
-        if (this.goLeftStart > (-(filmSeriesFiltered.length - 4) * 300)) {
+        if (this.goLeftStart > (-(filmSeriesFiltered.length - 1) * 300)) {
           this.goLeftStart -= 308;
           this.goLeft = this.goLeftStart + 'px';
         }
