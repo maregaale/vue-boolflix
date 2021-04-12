@@ -2,6 +2,7 @@ const app = new Vue (
   {
     el: "#root",
     data: {
+      baseUrl: "https://api.themoviedb.org/3/search/",
       search: "",
       filmAndSeries: [],
       displayIf: false,
@@ -35,7 +36,7 @@ const app = new Vue (
 
         if (this.search != "") {
           // prima chiamata API per i film
-          axios.get("https://api.themoviedb.org/3/search/movie", {
+          axios.get(this.baseUrl + "movie", {
             params: {
               api_key: "cd918788b3810512019e7d18b803e41d",
               query: this.search,
@@ -49,7 +50,7 @@ const app = new Vue (
             this.voteInFive(filmReply);
           }),
           // seconda chiamata API per le serie
-          axios.get("https://api.themoviedb.org/3/search/tv", {
+          axios.get(this.baseUrl + "tv", {
             params: {
               api_key: "cd918788b3810512019e7d18b803e41d",
               query: this.search,
