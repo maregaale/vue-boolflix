@@ -48,21 +48,22 @@ const app = new Vue (
 
             this.showArrowsAndVote(filmReply);
             this.voteInFive(filmReply);
-          }),
-          // seconda chiamata API per le serie
-          axios.get(this.baseUrl + "tv", {
-            params: {
-              api_key: "cd918788b3810512019e7d18b803e41d",
-              query: this.search,
-              language: "it-IT",
-            }
-          })
-          .then((serieReply) => {
-            // pusho le serie nell'array
-            serieReply.data.results.forEach((item, i) => {
-              this.filmAndSeries.push(item);
-            });
-          })
+
+            // seconda chiamata API per le serie
+            axios.get(this.baseUrl + "tv", {
+              params: {
+                api_key: "cd918788b3810512019e7d18b803e41d",
+                query: this.search,
+                language: "it-IT",
+              }
+            })
+            .then((serieReply) => {
+              // pusho le serie nell'array
+              serieReply.data.results.forEach((item, i) => {
+                this.filmAndSeries.push(item);
+              });
+            })
+          });
         } else {
           this.filmAndSeries = [];
           this.displayIf = false;
