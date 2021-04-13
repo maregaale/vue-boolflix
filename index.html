@@ -34,7 +34,7 @@
         <h1>Boolflix</h1>
         <!-- searchbar principale -->
         <div class="main_searchbar">
-          <input type="text" name="search-film" value="" placeholder="cerca nome del film" v-model="search">
+          <input @keyup.enter="searchFilm" type="text" name="search-film" value="" placeholder="cerca nome del film" v-model="search">
           <button @click="searchFilm" class="btn" type="button" name="button">vai</button>
         </div>
         <!-- /searchbar principale -->
