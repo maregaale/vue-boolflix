@@ -93,7 +93,7 @@ main {
   height: 450px;
   width: 300px;
   position: relative;
-  margin: 4px;
+  margin: 0 4px;
   cursor: pointer;
   display: flex;
   transition: all 0.5s;
@@ -108,15 +108,15 @@ main {
 
 .overlay {
   position: absolute;
-  top: 0;
+  top: 450px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -450px;
   background-color: #202124;
   color: #fff;
   padding: 30px 15px;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: all 0.6s;
 }
 
 .overlay p {
@@ -143,6 +143,8 @@ main {
 
 .film:hover .overlay{
   opacity: 1;
+  top: 0;
+  bottom: 0;
 }
 /* /cards dei film */
 

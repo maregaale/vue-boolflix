@@ -68,10 +68,11 @@ const app = new Vue (
               serieReply.data.results.forEach((item, i) => {
                 this.filmAndSeries.push(item);
               });
+
+              // mostro il contenitore dei film
+              this.displayFilms = true;
             })
 
-            // mostro il contenitore dei film
-            this.displayFilms = true;
           });
 
         } else {
