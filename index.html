@@ -52,6 +52,7 @@
 
           <!-- film -->
           <div :style="{left : goLeft}" v-if="film.poster_path != null" v-for="film in filmAndSeries" class="film">
+            <!-- overlay -->
             <div class="overlay">
               <!-- genere -->
               <p v-if="film.title"><strong>Genere:</strong> film</p>
@@ -86,7 +87,11 @@
               <p v-if="film.overview != ''" class="overview"><strong>Overview:</strong> {{film.overview}}</p>
               <!-- /overview -->
             </div>
+            <!-- /overlay -->
+
+            <!-- immagine di copertina delle cards con i film -->
             <img :src="'https://image.tmdb.org/t/p/w300' + film.poster_path" alt="">
+            <!-- /immagine di copertina delle cards con i film -->
           </div>
           <!-- /film -->
 

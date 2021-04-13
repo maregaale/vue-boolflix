@@ -84,6 +84,7 @@ main {
   max-width: calc(308px * 4);
 }
 
+/* cards dei film */
 .film {
   height: 450px;
   width: 300px;
@@ -133,7 +134,9 @@ main {
 .film:hover .overlay{
   opacity: 1;
 }
+/* /cards dei film */
 
+/* frecce */
 main .arrow_container {
   display: none;
   line-height: 450px;
@@ -149,4 +152,5 @@ main .arrow_container.display {
 main .arrow_container i {
   cursor: pointer;
 }
+/* /frecce */
 /* /corpo della pagina */
