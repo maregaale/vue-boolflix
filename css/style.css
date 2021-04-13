@@ -76,6 +76,10 @@ main {
 }
 
 .films_container {
+  display: none;
+}
+
+.films_container.display {
   display: flex;
   justify-content: flex-start;
   overflow: hidden;
@@ -94,6 +98,12 @@ main {
   display: flex;
   transition: all 0.5s;
   left: 0;
+}
+
+.film .poster {
+  width: 300px;
+  object-position: right;
+  object-fit: cover;
 }
 
 .overlay {

@@ -4,8 +4,10 @@ const app = new Vue (
     data: {
       baseUrl: "https://api.themoviedb.org/3/search/",
       search: "",
+      apiKey: "cd918788b3810512019e7d18b803e41d",
       filmAndSeries: [],
       displayIf: false,
+      displayFilms: false,
       goLeftStart: 0,
       goLeft: "",
       voteStars: [1, 2, 3, 4, 5],
@@ -15,9 +17,10 @@ const app = new Vue (
 
       // funzione che mostra le frecce del carousel
       showArrowsAndVote: function (reply) {
-        // mostro le frecce del carousel
+
         this.displayIf = false;
 
+        // mostro le frecce del carousel
         if (this.search != "" && reply.data.results.length > 4) {
           this.displayIf = true;
         }
@@ -35,15 +38,17 @@ const app = new Vue (
       searchFilm: function () {
 
         if (this.search != "") {
+
           // prima chiamata API per i film
           axios.get(this.baseUrl + "movie", {
             params: {
-              api_key: "cd918788b3810512019e7d18b803e41d",
+              api_key: this.apiKey,
               query: this.search,
               language: "it-IT",
             }
           })
           .then((filmReply) => {
+
             this.filmAndSeries = filmReply.data.results;
 
             this.showArrowsAndVote(filmReply);
@@ -52,18 +57,23 @@ const app = new Vue (
             // seconda chiamata API per le serie
             axios.get(this.baseUrl + "tv", {
               params: {
-                api_key: "cd918788b3810512019e7d18b803e41d",
+                api_key: this.apiKey,
                 query: this.search,
                 language: "it-IT",
               }
             })
             .then((serieReply) => {
+
               // pusho le serie nell'array
               serieReply.data.results.forEach((item, i) => {
                 this.filmAndSeries.push(item);
               });
             })
+
+            // mostro il contenitore dei film
+            this.displayFilms = true;
           });
+
         } else {
           this.filmAndSeries = [];
           this.displayIf = false;
@@ -76,10 +86,8 @@ const app = new Vue (
 
       // funzione che sposta in avanti i film nel carousel
       goSlider: function () {
-        let filmSeriesFiltered = this.filmAndSeries.filter( (item) => {
-            return item.poster_path != null;
-        })
-        if (this.goLeftStart > (-(filmSeriesFiltered.length - 1) * 300)) {
+
+        if (this.goLeftStart > (-(this.filmAndSeries.length - 1) * 300)) {
           this.goLeftStart -= 308;
           this.goLeft = this.goLeftStart + 'px';
         }
@@ -87,9 +95,7 @@ const app = new Vue (
 
       // funzione che sposta indietro i film nel carousel
       returnSlider: function () {
-        let filmSeriesFiltered = this.filmAndSeries.filter( (item) => {
-            return item.poster_path != null;
-        })
+
         if (this.goLeftStart < 0) {
           this.goLeftStart += 308;
           this.goLeft = this.goLeftStart + 'px';

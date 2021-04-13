@@ -48,10 +48,10 @@
           <i @click="returnSlider" class="fas fa-angle-left" ></i>
         </div>
         <!-- /freccia sinistra -->
-        <div class="films_container">
 
+        <div :class="{display: displayFilms}" class="films_container">
           <!-- film -->
-          <div :style="{left : goLeft}" v-if="film.poster_path != null" v-for="film in filmAndSeries" class="film">
+          <div :style="{left : goLeft}" v-for="film in filmAndSeries" class="film">
             <!-- overlay -->
             <div class="overlay">
               <!-- genere -->
@@ -90,7 +90,7 @@
             <!-- /overlay -->
 
             <!-- immagine di copertina delle cards con i film -->
-            <img :src="'https://image.tmdb.org/t/p/w300' + film.poster_path" alt="">
+            <img class="poster" :src="(film.poster_path ? 'https://image.tmdb.org/t/p/w300' + film.poster_path : 'img/ciak.jpg')" :alt="film.title">
             <!-- /immagine di copertina delle cards con i film -->
           </div>
           <!-- /film -->
