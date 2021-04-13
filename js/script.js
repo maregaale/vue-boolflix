@@ -74,7 +74,7 @@ const app = new Vue (
             })
 
           });
-
+          
         } else {
           this.filmAndSeries = [];
           this.displayIf = false;
