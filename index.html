@@ -45,13 +45,17 @@
       <main>
         <!-- freccia sinistra -->
         <div class="arrow_container" :class="{display: displayIf}">
-          <i @click="returnSlider" class="fas fa-angle-left"></i>
+          <i @click="returnSlider" class="fas fa-angle-left" :class="{color : goLeftStart != 0}"></i>
         </div>
         <!-- /freccia sinistra -->
 
         <div :class="{display: displayFilms}" class="films_container">
           <!-- film -->
           <div :style="{left : goLeft}" v-for="film in filmAndSeries" class="film">
+            <!-- immagine di copertina delle cards con i film -->
+            <img class="poster" :src="(film.poster_path ? 'https://image.tmdb.org/t/p/w300' + film.poster_path : 'img/ciak.jpg')" :alt="film.title">
+            <!-- /immagine di copertina delle cards con i film -->
+
             <!-- overlay -->
             <div class="overlay">
               <!-- genere -->
@@ -86,20 +90,15 @@
               <!-- /overview -->
             </div>
             <!-- /overlay -->
-
-            <!-- immagine di copertina delle cards con i film -->
-            <img class="poster" :src="(film.poster_path ? 'https://image.tmdb.org/t/p/w300' + film.poster_path : 'img/ciak.jpg')" :alt="film.title">
-            <!-- /immagine di copertina delle cards con i film -->
           </div>
           <!-- /film -->
-
         </div>
+
         <!-- freccia destra -->
         <div class="arrow_container" :class="{display: displayIf}">
-          <i @click="goSlider" class="fas fa-angle-right"></i>
+          <i @click="goSlider" class="fas fa-angle-right" :class="{color : this.goLeftStart >= -(filmAndSeries.length - 2) * 308}"></i>
         </div>
         <!-- /freccia destra -->
-
       </main>
       <!-- /corpo della pagina -->
     </div>

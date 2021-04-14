@@ -164,5 +164,9 @@ main .arrow_container.display {
 main .arrow_container i {
   cursor: pointer;
 }
+
+main .arrow_container i.color {
+  color: red;
+}
 /* /frecce */
 /* /corpo della pagina */

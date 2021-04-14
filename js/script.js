@@ -74,7 +74,7 @@ const app = new Vue (
             })
 
           });
-          
+
         } else {
           this.filmAndSeries = [];
           this.displayIf = false;
@@ -88,7 +88,7 @@ const app = new Vue (
       // funzione che sposta in avanti i film nel carousel
       goSlider: function () {
 
-        if (this.goLeftStart > (-(this.filmAndSeries.length - 1) * 300)) {
+        if (this.goLeftStart > (-(this.filmAndSeries.length - 1) * 308)) {
           this.goLeftStart -= 308;
           this.goLeft = this.goLeftStart + 'px';
         }
