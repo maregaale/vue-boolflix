@@ -17,7 +17,7 @@ const app = new Vue (
     methods: {
 
       // funzione che mostra le frecce del carousel
-      showArrowsAndVote: function (reply) {
+      showArrows: function (reply) {
 
         this.displayIf = false;
 
@@ -52,7 +52,7 @@ const app = new Vue (
 
             this.filmAndSeries = filmReply.data.results;
 
-            this.showArrowsAndVote(filmReply);
+            this.showArrows(filmReply);
             this.voteInFive(filmReply);
 
             // seconda chiamata API per le serie
@@ -72,6 +72,9 @@ const app = new Vue (
 
               // mostro il contenitore dei film
               this.displayFilms = true;
+
+              this.showArrows(serieReply);
+              this.voteInFive(serieReply);
             })
 
           });
