@@ -2,16 +2,17 @@ const app = new Vue (
   {
     el: "#root",
     data: {
-      baseUrl: "https://api.themoviedb.org/3/search/",
-      search: "",
-      apiKey: "cd918788b3810512019e7d18b803e41d",
       filmAndSeries: [],
+      voteStars: [1, 2, 3, 4, 5],
+      languages: ["en", "fr", "es", "de", "hi", "zh", "ja", "it", "ru", "ar", "ko", "he", "pt", "sv", "uk", "da", "fa"],
+      baseUrl: "https://api.themoviedb.org/3/search/",
+      apiKey: "cd918788b3810512019e7d18b803e41d",
+      lang: "it-IT",
+      search: "",
+      goLeft: "",
       displayIf: false,
       displayFilms: false,
       goLeftStart: 0,
-      goLeft: "",
-      voteStars: [1, 2, 3, 4, 5],
-      languages: ["en", "fr", "es", "de", "hi", "zh", "ja", "it", "ru", "ar", "ko", "he", "pt", "sv", "uk", "da", "fa"],
     },
     methods: {
 
@@ -44,7 +45,7 @@ const app = new Vue (
             params: {
               api_key: this.apiKey,
               query: this.search,
-              language: "it-IT",
+              language: this.lang,
             }
           })
           .then((filmReply) => {
@@ -59,7 +60,7 @@ const app = new Vue (
               params: {
                 api_key: this.apiKey,
                 query: this.search,
-                language: "it-IT",
+                language: this.lang,
               }
             })
             .then((serieReply) => {
