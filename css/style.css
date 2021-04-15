@@ -22,6 +22,21 @@ h1 {
   font-weight: normal;
 }
 
+h2 {
+  margin-bottom: 30px;
+  color: white;
+  font-size: 28px;
+  text-align: center;
+}
+
+.search_container h2 {
+  display: none;
+}
+
+.search_container h2.display {
+  display: block;
+}
+
 /* bottoni */
 .btn {
   padding: 7px;
@@ -72,7 +87,14 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 70px;
+  padding-bottom: 0;
+}
+
+.list_film_container {
+  display: flex;
+  margin-bottom: 70px;
 }
 
 .films_container {

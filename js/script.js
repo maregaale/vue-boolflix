@@ -3,16 +3,20 @@ const app = new Vue (
     el: "#root",
     data: {
       filmAndSeries: [],
+      popularFilms: [],
       voteStars: [1, 2, 3, 4, 5],
       languages: ["en", "fr", "es", "de", "hi", "zh", "ja", "it", "ru", "ar", "ko", "he", "pt", "sv", "uk", "da", "fa"],
       baseUrl: "https://api.themoviedb.org/3/search/",
+      popularUrl: "https://api.themoviedb.org/3/movie/popular",
       apiKey: "cd918788b3810512019e7d18b803e41d",
       lang: "it-IT",
       search: "",
       goLeft: "",
+      goPopularLeft: "",
       displayIf: false,
       displayFilms: false,
       goLeftStart: 0,
+      popularLeftStart: 0,
     },
     methods: {
 
@@ -70,7 +74,7 @@ const app = new Vue (
                 this.filmAndSeries.push(item);
               });
 
-              // mostro il contenitore dei film
+              // mostro il contenitore dei film cercati
               this.displayFilms = true;
 
               this.showArrows(serieReply);
@@ -80,8 +84,12 @@ const app = new Vue (
           });
 
         } else {
+          // azzero l'array e tolgo le frecce
           this.filmAndSeries = [];
           this.displayIf = false;
+
+          // tolgo il contenitore dei film cercati
+          this.displayFilms = false;
         }
 
         // azzero il left dei film per centrare i film nelle nuove ricerche
@@ -106,6 +114,41 @@ const app = new Vue (
           this.goLeft = this.goLeftStart + 'px';
         }
       },
+
+      // funzione che sposta in avanti i film popolari
+      goPopularSlider: function () {
+
+        if (this.popularLeftStart > (-(this.popularFilms.length - 1) * 308)) {
+          this.popularLeftStart -= 308;
+          this.goPopularLeft = this.popularLeftStart + 'px';
+        }
+      },
+
+      // funzione che sposta indietro i film popolari
+      returnPopularSlider: function () {
+
+        if (this.popularLeftStart < 0) {
+          this.popularLeftStart += 308;
+          this.goPopularLeft = this.popularLeftStart + 'px';
+        }
+      },
+    },
+
+    // mostra al created i film popolari
+    created: function () {
+
+        axios.get(this.popularUrl, {
+          params: {
+            api_key: this.apiKey,
+            language: this.lang,
+          }
+        })
+        .then( (response) => {
+          this.popularFilms = response.data.results;
+
+          this.showArrows(response);
+          this.voteInFive(response);
+        });
     },
   }
 );

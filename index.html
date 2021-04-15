@@ -43,62 +43,132 @@
 
       <!-- corpo della pagina -->
       <main>
-        <!-- freccia sinistra -->
-        <div class="arrow_container" :class="{display: displayIf}">
-          <i @click="returnSlider" class="fas fa-angle-left" :class="{color : goLeftStart != 0}"></i>
-        </div>
-        <!-- /freccia sinistra -->
 
-        <div :class="{display: displayFilms}" class="films_container">
-          <!-- film -->
-          <div :style="{left : goLeft}" v-for="film in filmAndSeries" class="film">
-            <!-- immagine di copertina delle cards con i film -->
-            <img class="poster" :src="(film.poster_path ? 'https://image.tmdb.org/t/p/w300' + film.poster_path : 'img/ciak.jpg')" :alt="film.title">
-            <!-- /immagine di copertina delle cards con i film -->
-
-            <!-- overlay -->
-            <div class="overlay">
-              <!-- genere -->
-              <p v-if="film.title"><strong>Genere:</strong> film</p>
-              <p v-else-if="film.name"><strong>Genere:</strong> serie tv</p>
-              <!-- /genere -->
-
-              <!-- titolo -->
-              <p><strong>Titolo:</strong> {{film.title}}{{film.name}}</p>
-              <!-- /titolo -->
-
-              <!-- titolo originale -->
-              <p><strong>Titolo originale:</strong> {{film.original_title}}{{film.original_name}}</p>
-              <!-- /titolo originale -->
-
-              <!-- lingua originale -->
-              <div>
-                Lingua Originale:
-                <img class="flag" v-if="languages.includes(film.original_language)" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
-                <span v-if="!(languages.includes(film.original_language))"> {{film.original_language}}</span>
-              </div>
-              <!-- /lingua originale -->
-
-              <!-- voto -->
-              <p>
-                <strong>Voto:</strong> <i v-for="(star, index) in voteStars" class="fas fa-star" :class="{starActive : star <= film.vote_average }"></i>
-              </p>
-              <!-- /voto -->
-
-              <!-- overview -->
-              <p v-if="film.overview != ''" class="overview"><strong>Overview:</strong> {{film.overview}}</p>
-              <!-- /overview -->
+        <div class="populars_container">
+          <h2>I più popolari su Boolflix</h2>
+          <div class="list_film_container">
+            <!-- freccia sinistra -->
+            <div class="arrow_container display">
+              <i @click="returnPopularSlider" class="fas fa-angle-left" :class="{color : popularLeftStart != 0}"></i>
             </div>
-            <!-- /overlay -->
+            <!-- /freccia sinistra -->
+
+            <div class="films_container display">
+              <!-- film -->
+              <div :style="{left: goPopularLeft}" v-for="film in popularFilms" class="film">
+                <!-- immagine di copertina delle cards con i film -->
+                <img class="poster" :src="(film.poster_path ? 'https://image.tmdb.org/t/p/w300' + film.poster_path : 'img/ciak.jpg')" :alt="film.title">
+                <!-- /immagine di copertina delle cards con i film -->
+
+                <!-- overlay -->
+                <div class="overlay">
+                  <!-- genere -->
+                  <p><strong>Genere:</strong> film</p>
+                  <!-- /genere -->
+
+                  <!-- titolo -->
+                  <p><strong>Titolo:</strong> {{film.title}}</p>
+                  <!-- /titolo -->
+
+                  <!-- titolo originale -->
+                  <p><strong>Titolo originale:</strong> {{film.original_title}}</p>
+                  <!-- /titolo originale -->
+
+                  <!-- lingua originale -->
+                  <div>
+                    Lingua Originale:
+                    <img class="flag" v-if="languages.includes(film.original_language)" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
+                    <span v-if="!(languages.includes(film.original_language))"> {{film.original_language}}</span>
+                  </div>
+                  <!-- /lingua originale -->
+
+                  <!-- voto -->
+                  <p>
+                    <strong>Voto:</strong> <i v-for="(star, index) in voteStars" class="fas fa-star" :class="{starActive : star <= film.vote_average }"></i>
+                  </p>
+                  <!-- /voto -->
+
+                  <!-- overview -->
+                  <p v-if="film.overview != ''" class="overview"><strong>Overview:</strong> {{film.overview}}</p>
+                  <!-- /overview -->
+                </div>
+                <!-- /overlay -->
+              </div>
+              <!-- /film -->
+            </div>
+
+            <!-- freccia destra -->
+            <div class="arrow_container display">
+              <i @click="goPopularSlider" class="fas fa-angle-right" :class="{color : this.popularLeftStart >= -(popularFilms.length - 2) * 308}"></i>
+            </div>
+            <!-- /freccia destra -->
           </div>
-          <!-- /film -->
         </div>
 
-        <!-- freccia destra -->
-        <div class="arrow_container" :class="{display: displayIf}">
-          <i @click="goSlider" class="fas fa-angle-right" :class="{color : this.goLeftStart >= -(filmAndSeries.length - 2) * 308}"></i>
+
+
+        <div class="search_container">
+          <h2 :class="{display: displayFilms}">I film e le serie tv cercati</h2>
+
+          <div class="list_film_container">
+            <!-- freccia sinistra -->
+            <div class="arrow_container" :class="{display: displayIf}">
+              <i @click="returnSlider" class="fas fa-angle-left" :class="{color : goLeftStart != 0}"></i>
+            </div>
+            <!-- /freccia sinistra -->
+
+            <div :class="{display: displayFilms}" class="films_container">
+              <!-- film -->
+              <div :style="{left: goLeft}" v-for="film in filmAndSeries" class="film">
+                <!-- immagine di copertina delle cards con i film -->
+                <img class="poster" :src="(film.poster_path ? 'https://image.tmdb.org/t/p/w300' + film.poster_path : 'img/ciak.jpg')" :alt="film.title">
+                <!-- /immagine di copertina delle cards con i film -->
+
+                <!-- overlay -->
+                <div class="overlay">
+                  <!-- genere -->
+                  <p v-if="film.title"><strong>Genere:</strong> film</p>
+                  <p v-else-if="film.name"><strong>Genere:</strong> serie tv</p>
+                  <!-- /genere -->
+
+                  <!-- titolo -->
+                  <p><strong>Titolo:</strong> {{film.title}}{{film.name}}</p>
+                  <!-- /titolo -->
+
+                  <!-- titolo originale -->
+                  <p><strong>Titolo originale:</strong> {{film.original_title}}{{film.original_name}}</p>
+                  <!-- /titolo originale -->
+
+                  <!-- lingua originale -->
+                  <div>
+                    Lingua Originale:
+                    <img class="flag" v-if="languages.includes(film.original_language)" :src="'img/' + film.original_language + '.svg'" :alt="film.original_language">
+                    <span v-if="!(languages.includes(film.original_language))"> {{film.original_language}}</span>
+                  </div>
+                  <!-- /lingua originale -->
+
+                  <!-- voto -->
+                  <p>
+                    <strong>Voto:</strong> <i v-for="(star, index) in voteStars" class="fas fa-star" :class="{starActive : star <= film.vote_average }"></i>
+                  </p>
+                  <!-- /voto -->
+
+                  <!-- overview -->
+                  <p v-if="film.overview != ''" class="overview"><strong>Overview:</strong> {{film.overview}}</p>
+                  <!-- /overview -->
+                </div>
+                <!-- /overlay -->
+              </div>
+              <!-- /film -->
+            </div>
+
+            <!-- freccia destra -->
+            <div class="arrow_container" :class="{display: displayIf}">
+              <i @click="goSlider" class="fas fa-angle-right" :class="{color : this.goLeftStart >= -(filmAndSeries.length - 2) * 308}"></i>
+            </div>
+            <!-- /freccia destra -->
+          </div>
         </div>
-        <!-- /freccia destra -->
       </main>
       <!-- /corpo della pagina -->
     </div>
